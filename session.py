@@ -1,6 +1,7 @@
 #!test/bin/python
 import uuid
-import json 
+import json
+import datetime
 from flask import Flask
 from flask import jsonify
 from flask import abort
@@ -18,8 +19,8 @@ import pdb
 
 app = Flask(__name__, static_url_path="")
 api = Api(app)
-
 cb = Bucket('couchbase:///task', username = 'prem.saha',password='untrodden123')
+now = datetime.datetime.now()
 # cluster = CouchbaseCluster.create('couchbase://localhost')
 
 task_fields = {
@@ -55,8 +56,10 @@ class TaskListAPI(Resource):
     def post(self):
         
         store_id = uuid.uuid4().hex
-        a = store_id
+        # a = store_id
         args = self.reqparse.parse_args()
+        list1 = now.strftime("%Y-%m-%d %H:%M")
+        list2 = now.strftime("%H:%M")
          
         task = {
 
@@ -67,7 +70,7 @@ class TaskListAPI(Resource):
 
         }
 
-        TaskListAPI.response = a 
+        # TaskListAPI.response = a 
         cb.upsert(store_id,{'id':store_id,'comn':[task]})
         rv = cb.get(store_id)
         return jsonify(rv.value)

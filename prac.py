@@ -41,6 +41,7 @@ class TaskListAPI(Resource):
         self.reqparse.add_argument('done', type=bool, default="",
                                    location='json')
 
+
         super(TaskListAPI, self).__init__()
 
     def post(self):
@@ -63,7 +64,7 @@ class TaskListAPI(Resource):
         rv = cb.get(store_id)
         return jsonify(rv.value)
               
-    def put(self):  
+    def put(self): 
         
         sub_id = TaskListAPI.response
         args = self.reqparse.parse_args()

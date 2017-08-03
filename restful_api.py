@@ -116,7 +116,7 @@ class TaskAPI(Resource):
 
 
 api.add_resource(TaskListAPI, '/todo/api/v1.0/tasks', endpoint='tasks')
-api.add_resource(TaskAPI, '/todo/api/v1.0/tasks/<int:id>', endpoint='task')
+api.add_resource(TaskListAPI, '/todo/api/v1.0/tasks/<int:id>', endpoint='task')
 
 
 if __name__ == '__main__':
